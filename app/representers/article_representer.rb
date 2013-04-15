@@ -7,10 +7,10 @@ module ArticleRepresenter
   property :longitude
 
   link :self do
-    article_path self
+    { href: article_path(self), title: title }
   end
 
   link :external do
-    self.url
+    { href: self.url, title: 'Wikipedia' }
   end
 end
