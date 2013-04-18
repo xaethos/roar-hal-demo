@@ -13,7 +13,7 @@ module ArticlesRepresenter
   end
 
   link :search do
-    "#{search_articles_path}{?title}"
+    { href: "#{search_articles_path}{?title}", title: "Search" }
   end
 end
 
