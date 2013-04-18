@@ -1,5 +1,9 @@
 WikiNearMe::Application.routes.draw do
-  resources :articles, except: [:new, :edit]
+  resources :articles, except: [:new, :edit] do
+    collection do
+      get :search
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

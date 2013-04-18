@@ -8,6 +8,11 @@ class ArticlesController < ApplicationController
     respond_with @articles
   end
 
+  def search
+    @articles = Article.where("title ILIKE ?", "%#{params[:title]}%").all
+    respond_with @articles
+  end
+
   def show
     @article = Article.find(params[:id])
 

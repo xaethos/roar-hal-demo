@@ -11,5 +11,9 @@ module ArticlesRepresenter
   link :self do
     articles_path
   end
+
+  link :search do
+    "#{search_articles_path}{?title}"
+  end
 end
 
