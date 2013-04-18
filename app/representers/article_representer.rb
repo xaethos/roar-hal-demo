@@ -1,13 +1,12 @@
 module ArticleRepresenter
   include Roar::Representer::JSON::HAL
   include Roar::Representer::Feature::Hypermedia
+  include EmbeddedArticleRepresenter
 
   property :title
-  property :latitude
-  property :longitude
 
   link :self do
-    { href: article_path(self), title: title }
+    { href: article_path(self) }
   end
 
   link :external do

@@ -2,7 +2,7 @@ module ArticlesRepresenter
   include Roar::Representer::JSON::HAL
   include Roar::Representer::Feature::Hypermedia
 
-  collection :article, extend: ArticleRepresenter, embedded: true
+  collection :article, extend: EmbeddedArticleRepresenter, embedded: true
 
   def article
     collect
