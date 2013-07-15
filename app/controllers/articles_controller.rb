@@ -2,25 +2,28 @@ class ArticlesController < ApplicationController
   include Roar::Rails::ControllerAdditions
   respond_to :json
 
-  def index
-    @articles = Article.all
+  rescue_from Exception do |ex|
+    render status: 500, json: {
+      error: ex.class.name,
+      message: ex.message,
+      backtrace: ex.backtrace.select { |st| st.starts_with? Rails.root.to_s }
+    }
+  end
 
-    respond_with @articles
+  def index
+    respond_with Article.scoped
   end
 
   def search
-    @articles = Article.where("title ILIKE ?", "%#{params[:title]}%").all
-    respond_with @articles
+    respond_with Article.where("title ILIKE ?", "%#{params[:title]}%")
   end
 
   def show
-    @article = Article.find(params[:id])
-
-    respond_with @article
+    respond_with Article.find(params[:id])
   end
 
   def create
-    @article = Article.new(params[:article])
+    @article = consume! Article.new
 
     if @article.save
       respond_with @article, status: :created, location: @article
@@ -30,9 +33,9 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article = Article.find(params[:id])
+    @article = consume! Article.find(params[:id])
 
-    if @article.update_attributes(params[:article])
+    if @article.save
       head :no_content
     else
       respond_with @article.errors, status: :unprocessable_entity
@@ -40,9 +43,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
-    @article.destroy
-
+    Article.find(params[:id]).destroy
     head :no_content
   end
+
 end

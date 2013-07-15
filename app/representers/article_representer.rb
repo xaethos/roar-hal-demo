@@ -1,15 +1,14 @@
-module ArticleRepresenter
+class ArticleRepresenter < Roar::Decorator
   include Roar::Representer::JSON::HAL
-  include Roar::Representer::Feature::Hypermedia
-  include EmbeddedArticleRepresenter
+  include Roar::Decorator::HypermediaConsumer
 
   property :title
+  property :latitude
+  property :longitude
 
-  link :self do
-    { href: article_path(self) }
-  end
+  link(:self) { article_path(represented) }
 
-  link :external do
-    { href: self.url, title: 'Wikipedia' }
+  link rel: :external, title: 'Wikipedia' do
+    represented.url
   end
 end
