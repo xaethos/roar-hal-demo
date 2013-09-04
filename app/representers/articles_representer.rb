@@ -1,20 +1,16 @@
 class ArticlesRepresenter < Roar::Decorator
   include Roar::Representer::JSON::HAL
 
-  itemDecorator = Class.new(Roar::Decorator) do
-    include Roar::Representer::JSON::HAL
-    property :latitude
-    property :longitude
-    link :self do
-      { href: article_path(represented), title: represented.title }
-    end
-  end
-
   collection :all,
     as: :article,
     class: Article,
-    decorator: itemDecorator,
-    embedded: true
+    embedded: true do
+      property :latitude
+      property :longitude
+      link :self do
+        { href: article_path(represented), title: represented.title }
+      end
+    end
 
   link :self do
     articles_path

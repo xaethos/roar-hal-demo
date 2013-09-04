@@ -43,7 +43,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.22)
     mini_portile (0.5.1)
-    multi_json (1.7.7)
+    multi_json (1.7.9)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     pg (0.15.1)
@@ -77,16 +77,16 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    representable (1.5.3)
+    representable (1.6.1)
       multi_json
       nokogiri
-    roar (0.11.19)
-      representable (~> 1.5.3)
-    roar-rails (0.1.1)
+    roar (0.12.0)
+      representable (~> 1.6.0)
+    roar-rails (0.1.4)
       actionpack
       hooks
       railties (>= 3.0.0)
-      roar (~> 0.11.13)
+      roar (>= 0.11.13)
       test_xml (>= 0.1.6)
     sprockets (2.2.2)
       hike (~> 1.2)
