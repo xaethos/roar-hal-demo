@@ -9,6 +9,7 @@ gem 'roar-rails'
 
 group :development, :test do
   gem 'awesome_print'
+  gem 'pry'
 end
 
 # To use debugger

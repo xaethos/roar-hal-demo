@@ -8,6 +8,8 @@ class ArticleRepresenter < Roar::Decorator
 
   link(:self) { article_path(represented) }
 
+  link(:profile) { '/profile/article' }
+
   link rel: :external, title: 'Wikipedia' do
     represented.url
   end

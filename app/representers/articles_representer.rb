@@ -16,6 +16,8 @@ class ArticlesRepresenter < Roar::Decorator
     articles_path
   end
 
+  link(:profile) { '/profile/article-list' }
+
   link rel: :search, title: 'Search' do
     "#{search_articles_path}{?title}"
   end
